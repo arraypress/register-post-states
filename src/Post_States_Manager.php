@@ -19,17 +19,23 @@
  *
  * Note: The class includes a check to prevent redefinition if it's already been defined in the namespace.
  *
- * @package     ArrayPress/Utils/WP/Post_States_Manager
- * @copyright   Copyright (c) 2023, ArrayPress Limited
- * @license     GPL2+
- * @since       1.0.0
- * @author      David Sherlock
+ * @package       arraypress/register-post-states
+ * @copyright     Copyright (c) 2024, ArrayPress Limited
+ * @license       GPL2+
+ * @since         1.0.0
+ * @author        David Sherlock
  */
 
 namespace ArrayPress\Utils\WP;
 
+use InvalidArgumentException;
+use WP_Post;
+use function add_filter;
+use function is_wp_error;
+
 /**
- * A WordPress library for defining and managing custom post states within the admin area, facilitating a more informative and intuitive post management experience.
+ * A WordPress library for defining and managing custom post states within the admin area, facilitating a more
+ * informative and intuitive post management experience.
  *
  * If the class already exists in the namespace, it won't be redefined.
  */
@@ -73,11 +79,11 @@ if ( ! class_exists( __NAMESPACE__ . '\\Post_States_Manager' ) ) :
 
 			// If the default 'get_option' is not callable (which would be unusual), throw an exception
 			if ( ! is_callable( $this->option_getter ) ) {
-				throw new \InvalidArgumentException( __( 'The option getter is not a callable function.', 'text-domain' ) );
+				throw new InvalidArgumentException( 'The option getter is not a callable function.' );
 			}
 
 			if ( empty( $this->options_map ) ) {
-				throw new \InvalidArgumentException( __( 'The options map cannot be empty and must contain valid keys and labels.', 'text-domain' ) );
+				throw new InvalidArgumentException( 'The options map cannot be empty and must contain valid keys and labels.' );
 			}
 
 			// Add the filter hook
@@ -100,13 +106,13 @@ if ( ! class_exists( __NAMESPACE__ . '\\Post_States_Manager' ) ) :
 		/**
 		 * Adds custom page state displays to the WordPress Pages list.
 		 *
-		 * @param array    $post_states Existing post states.
-		 * @param \WP_Post $post        The current post object.
+		 * @param array   $post_states Existing post states.
+		 * @param WP_Post $post        The current post object.
 		 *
 		 * @return array The modified post states.
 		 */
-		public function display_post_states( array $post_states, \WP_Post $post ): array {
-			if ( \is_wp_error( $this->options_map ) ) {
+		public function display_post_states( array $post_states, WP_Post $post ): array {
+			if ( is_wp_error( $this->options_map ) ) {
 				return $post_states; // Early return if the options map is invalid.
 			}
 
