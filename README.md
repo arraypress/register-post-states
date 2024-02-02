@@ -36,6 +36,9 @@ built-in `get_option` function. Here's how you can set it up:
 // Require the Composer autoloader.
 require_once __DIR__ . '/vendor/autoload.php';
 
+// Configure post states with an associative array, mapping option keys to labels.
+// Optionally, specify a callable function like `get_option` to retrieve option values.
+// It's important to ensure `get_option` returns a valid WordPress post ID to match with the admin posts list.
 register_post_states( [
     'landing_page'  => __( 'Landing Page', 'text-domain' ),
     'featured_post' => __( 'Featured Post', 'text-domain' )
