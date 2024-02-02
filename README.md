@@ -13,13 +13,14 @@ identification and categorization.
 
 ## Minimum Requirements ##
 
-**PHP:** 7.4
-**WordPress:** 6.4.3
+* **PHP:** 7.4
+* **WordPress:** 6.4.3
 
 ## Installation ##
 
 Register Post States is a developer library, not a plugin, which means you need to include it somewhere in your own
 project.
+
 You can use Composer:
 
 ```bash
@@ -88,12 +89,9 @@ initialization errors and ensures a smooth user experience.
 
 ```php
 register_post_states( $options_map, 'get_option', function( $exception ) {
-    // Custom error handling logic goes here
+    edd_debug_log_exception( $exception );
 });
 ```
-
-By integrating `Post_States_Manager`, you can enhance the content management capabilities of your WordPress site,
-providing a more informative and efficient admin panel for your users.
 
 ## Contributions
 
