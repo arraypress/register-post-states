@@ -1,0 +1,30 @@
+{
+  "name": "arraypress/register-post-states",
+  "description": "A WordPress library for defining and managing custom post states within the admin area, facilitating a more informative and intuitive post management experience.",
+  "homepage": "https://github.com/arraypress/register-post-states/",
+  "type": "library",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "David Sherlock",
+      "homepage": "https://arraypress.com/"
+    }
+  ],
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "require": {
+    "php": "^7.4 || ^8.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "ArrayPress\\RegisterPostStates\\": "src/"
+    },
+    "files": [
+      "src/Functions.php"
+    ]
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
