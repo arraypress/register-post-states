@@ -14,31 +14,34 @@ identification and categorization.
 ## Minimum Requirements ##
 
 * **PHP:** 7.4
-* **WordPress:** 6.4.3
+* **WordPress:** 6.5.4
 
-## Installation ##
+## Installation
 
-Register Post States is a developer library, not a plugin, which means you need to include it somewhere in your own
-project.
+This library is a developer tool, not a WordPress plugin, so it needs to be included in your WordPress project or plugin.
 
-You can use Composer:
+You can install it using Composer:
 
 ```bash
-composer require arraypress/register-post-states
+composer require arraypress/register-custom-columns
 ```
 
-## Basic Usage ##
-
-To utilize this functionality, you first define an associative array that maps option keys to labels for the post
-states. You can optionally specify a callable function responsible for retrieving option values, such as WordPress'
-built-in `get_option` function. Here's how you can set it up:
+## Basic Usage
 
 ```php
 // Require the Composer autoloader.
 require_once __DIR__ . '/vendor/autoload.php';
 
 use function ArrayPress\RegisterPostStates\register_post_states;
+```
 
+### Registering Post States
+
+To utilize this functionality, you first define an associative array that maps option keys to labels for the post
+states. You can optionally specify a callable function responsible for retrieving option values, such as WordPress'
+built-in `get_option` function. Here's how you can set it up:
+
+```php
 // Configure post states with an associative array, mapping option keys to labels.
 // Optionally, specify a callable function like `get_option` to retrieve option values.
 // It's important to ensure `get_option` returns a valid WordPress post ID to match with the admin posts list.
@@ -48,19 +51,19 @@ register_post_states( [
 ] );
 ```
 
-When the `Post_States_Manager` is initialized with the provided options, it hooks into
+When the `RegisterPostStates` is initialized with the provided options, it hooks into
 WordPress `'display_post_states'` filter. This integration allows it to append the custom state labels to the
 appropriate posts in the admin list view, based on the configuration provided.
 
 Ensure that this function returns a valid post ID to correctly associate custom state labels with the appropriate posts.
 
-## Advanced Usage ##
+### Advanced Usage
 
 For more advanced customization, you can set a specific callable function to fetch option values instead of the
 default `get_option`. This is particularly useful if your WordPress setup utilizes a custom options management system,
 such as `edd_get_option` from Easy Digital Downloads or any other custom-built mechanism.
 
-Here's how to define a custom getter function for the `Post_States_Manager`:
+Here's how to define a custom getter function for the `RegisterPostStates`:
 
 ```php
 $options_map = [
